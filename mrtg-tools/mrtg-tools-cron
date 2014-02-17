@@ -1,0 +1,6 @@
+#
+# Cron snipplet for the tools from the package mrtg-tools
+# creating/updating the HTML pages and mrtg results for your installation
+# 
+-0 4 * * *     root test -x /usr/bin/indexmaker-wrapper && /usr/bin/indexmaker-wrapper 1>/dev/null 2>&1
+-*/5 * * * *   root test -x /usr/bin/mrtg-wrapper && /usr/bin/mrtg-wrapper 1>/dev/null 2>&1
