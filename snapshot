@@ -1,0 +1,16 @@
+#!/bin/sh
+set -x
+WC="$PWD"
+pushd $WC
+OBS="../"
+PKG="opensuse-admin-tools"
+REV="$(git log --pretty=oneline --abbrev-commit | head -n 1 | awk '{print $1}')"
+BRANCH="0.0.1"
+DATE="$(date +'%Y%m%d')"
+PKGVER="${BRANCH}+git${DATE}.${REV}"
+echo -e "\n\n${PKGVER}\n\n"
+PKGDIR="${PKG}-${PKGVER}"
+ARCHIVE="${OBS}/${PKGDIR}.tar"
+git archive --output $ARCHIVE  --prefix=${PKGDIR}/ $REV
+xz -9v $ARCHIVE
+perl -p -i -e  "s/^(Version:\s+) \S+/\$1 ${PKGVER}/" "${OBS}/${PKG}.spec"
