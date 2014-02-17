@@ -18,5 +18,8 @@ MySQL-Tools
 
 Contains tools for maintaining our MySQL servers.
 
+ Packager Note:
+----------------
 
-
+The snapshot scripts assumes that the git working copy is inside the
+OBS package working copy!
